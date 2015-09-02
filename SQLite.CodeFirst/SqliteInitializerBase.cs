@@ -1,7 +1,7 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using SQLite.CodeFirst.Convention;
+using SQLite.CodeFirst.Conventions;
 using System.IO;
 
 namespace SQLite.CodeFirst
@@ -48,6 +48,10 @@ namespace SQLite.CodeFirst
             {
                 // Ignore it.
             }
+
+            // The Entity Framework does not support the "UNIQUE" Keyword.
+            // Thus this is added by using a custom Convention and a custom Attribute (UniqueAttribute)
+            modelBuilder.Conventions.Add<UniqueConvention>();
         }
 
         /// <summary>

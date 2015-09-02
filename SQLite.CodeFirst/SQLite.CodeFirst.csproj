@@ -95,10 +95,12 @@
     <Compile Include="Builder\ForeignKeyStatementBuilder.cs" />
     <Compile Include="Builder\CreateDatabaseStatementBuilder.cs" />
     <Compile Include="Builder\PrimaryKeyStatementBuilder.cs" />
-    <Compile Include="Convention\SqliteForeignKeyIndexConvention.cs" />
+    <Compile Include="Conventions\UniqueConvention.cs" />
+    <Compile Include="Conventions\SqliteForeignKeyIndexConvention.cs" />
     <Compile Include="Extensions\EntityTypeExtension.cs" />
     <Compile Include="SqliteCreateDatabaseIfNotExists.cs" />
     <Compile Include="SqliteDropCreateDatabaseAlways.cs" />
+    <Compile Include="Statement\ColumnConstraint\UniqueConstraint.cs" />
     <Compile Include="Statement\ColumnConstraint\MaxLengthConstraint.cs" />
     <Compile Include="Statement\CreateIndexStatement.cs" />
     <Compile Include="Statement\CreateIndexStatementCollection.cs" />
@@ -119,6 +121,7 @@
     <Compile Include="Statement\IStatement.cs" />
     <Compile Include="Builder\CreateTableStatementBuilder.cs" />
     <Compile Include="Builder\NameCreators\TableNameCreator.cs" />
+    <Compile Include="Attributes\UniqueAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

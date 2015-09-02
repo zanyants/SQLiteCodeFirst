@@ -2,6 +2,7 @@
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Globalization;
 using System.Linq;
+using SQLite.CodeFirst.Conventions;
 using SQLite.CodeFirst.Statement;
 using SQLite.CodeFirst.Statement.ColumnConstraint;
 
@@ -34,6 +35,7 @@ namespace SQLite.CodeFirst.Builder
                 };
 
                 AddMaxLengthConstraintIfNecessary(property, columnStatement);
+                AddUniqueConstraintIfNecessary(property, columnStatement);
                 AdjustDatatypeForAutogenerationIfNecessary(property, columnStatement);
                 AddNullConstraintIfNecessary(property, columnStatement);
 
@@ -46,6 +48,16 @@ namespace SQLite.CodeFirst.Builder
             if (property.MaxLength.HasValue)
             {
                 columnStatement.ColumnConstraints.Add(new MaxLengthConstraint(property.MaxLength.Value));
+            }
+        }
+
+        private static void AddUniqueConstraintIfNecessary(EdmProperty property, ColumnStatement columnStatement)
+        {
+            MetadataProperty item;
+            bool found = property.MetadataProperties.TryGetValue(UniqueConvention.UniqueAnnotationName, true, out item);
+            if (found && (bool)item.Value)
+            {
+                columnStatement.ColumnConstraints.Add(new UniqueConstraint());
             }
         }
 
